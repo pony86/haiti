@@ -5,6 +5,9 @@ import (
 	"flag"
 	"fmt"
 	"github.com/ccpony86/haiti/core"
+	"github.com/ccpony86/haiti/im"
+	"github.com/ccpony86/haiti/pay"
+	"github.com/ccpony86/haiti/schedule"
 	"github.com/ccpony86/haiti/sso"
 )
 
@@ -19,7 +22,11 @@ func main() {
 		core.Run()
 	case "sso":
 		sso.Run()
+	case "im":
+		im.Run()
+	case "schedule":
+		schedule.Run()
+	case "pay":
+		pay.Run()
 	}
-
-	//core.Xxx()
 }
