@@ -28,5 +28,7 @@ func main() {
 		schedule.Run()
 	case "pay":
 		pay.Run()
+	default:
+		fmt.Println("core|sso|im|schedule|pay")
 	}
 }
