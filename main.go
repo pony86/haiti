@@ -2,8 +2,9 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
 	"github.com/ccpony86/haiti/core"
 	"github.com/ccpony86/haiti/im"
 	"github.com/ccpony86/haiti/pay"
@@ -12,23 +13,29 @@ import (
 )
 
 func main() {
-	service_type := flag.String("service", "core", "service type")
-	flag.Parse()
+	core.Router_register()
+	sso.Router_register()
+	im.Router_register()
+	schedule.Router_register()
+	pay.Router_register()
 
-	fmt.Println(*service_type)
+	fmt.Println(beego.AppConfig.String("mysqluser"))
+	fmt.Println(beego.AppConfig.String("mysqlpass"))
+	fmt.Println(beego.AppConfig.String("mysqlurls"))
+	fmt.Println(beego.AppConfig.String("mysqldb"))
 
-	switch *service_type {
-	case "core":
-		core.Run()
-	case "sso":
-		sso.Run()
-	case "im":
-		im.Run()
-	case "schedule":
-		schedule.Run()
-	case "pay":
-		pay.Run()
-	default:
-		fmt.Println("core|sso|im|schedule|pay")
+	var FilterUser = func(ctx *context.Context) {
+		if v := ctx.Input.Query("access_token"); v != "" {
+			//data := "ok"
+			fmt.Println(v)
+			//ctx.Output.Json(data, false, true)
+		} else {
+			data := `{"error","err"}`
+			ctx.Output.Json(data, false, true)
+		}
 	}
+
+	beego.InsertFilter("*", beego.BeforeRouter, FilterUser)
+
+	beego.Run()
 }

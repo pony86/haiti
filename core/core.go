@@ -6,13 +6,8 @@ import (
 	"github.com/astaxie/beego"
 )
 
-func Info() {
-	fmt.Println("core module")
-}
-
-func Run() {
-	fmt.Println("core run")
+func Router_register() {
+	fmt.Println("core router register")
 
 	beego.RESTRouter("/object", &ObjectController{})
-	beego.Run()
 }

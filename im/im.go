@@ -4,10 +4,6 @@ import (
 	"fmt"
 )
 
-func Info() {
-	fmt.Println("im module")
-}
-
-func Run() {
-	fmt.Println("im run")
+func Router_register() {
+	fmt.Println("im router register")
 }

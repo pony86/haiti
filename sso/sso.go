@@ -4,10 +4,6 @@ import (
 	"fmt"
 )
 
-func Info() {
-	fmt.Println("sso module")
-}
-
-func Run() {
-	fmt.Println("sso run")
+func Router_register() {
+	fmt.Println("sso router register")
 }
